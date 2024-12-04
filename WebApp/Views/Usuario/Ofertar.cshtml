@@ -1,0 +1,67 @@
+﻿@using Dominio
+@model Publicacion
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Título</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Nombre
+        </dd>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>
+                        Articulo
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Articulos)
+                {
+                    <tr>
+
+                        <td>
+                            @item.Nombre
+                        </td>
+                        <td>
+                            @item.Precio
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </dl>
+</div>
+
+<div>
+    <p>La mejor oferta hasta el momento es: @Model.ObtenerPrecio()</p>
+    @if (Model.Estado == Publicacion.EstadoActual.ABIERTA)
+    {
+        <form asp-action="Ofertar" method="post" id="ofertar">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="number" name="ofertaUsuario" id="monto"/>
+            <button type="submit">Ofertar </button>
+        </form>
+    }
+
+    <a asp-action="Index">Volver a la lista</a>
+
+    <p id="txt">@ViewBag.msg</p>
+
+</div>
+
+<script src="/js/Usuario/ofertar.js"></script>

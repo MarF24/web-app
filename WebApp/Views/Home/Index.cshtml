@@ -1,0 +1,15 @@
+﻿@using Dominio
+@model Usuario
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido</h1>
+    @if (Context.Session.GetString("NombreUsuario") != null)
+    {
+        <p>Bienvenido @Context.Session.GetString("NombreUsuario") </p>
+    }
+</div>
+

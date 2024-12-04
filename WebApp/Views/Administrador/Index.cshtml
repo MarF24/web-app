@@ -1,0 +1,90 @@
+﻿@using Dominio
+@model List<Publicacion>
+<h1>Lista de Subastas</h1>
+
+@if (TempData["MsjCerrar"] != null)
+{
+    <p>@TempData["MsjCerrar"].ToString()</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+               Acción
+            </th>
+            <th>
+                Precio
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.GetType().Name == "Subasta")
+            {
+
+
+                <tr>
+
+
+                    <td>
+                        @item.Nombre
+                    </td>
+                    <td>
+                        @item.GetType().Name
+                    </td>
+                    <td>
+                        @item.FechaPublicacion.Date.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.Estado
+
+                    </td>
+                    <td>
+                        @if (@item.Estado == Publicacion.EstadoActual.ABIERTA)
+                        {
+
+                            if (@item.GetType().Name == "Subasta")
+                            {
+
+                                <form asp-action="Cerrar" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit">Cerrar </button>
+                                </form>
+                            }
+                
+
+                        }
+
+                    </td>
+                    <td>
+
+                        @if (@item.ObtenerPrecio() == 0)
+                        {
+                            <p>No hay ofertas</p>
+
+                        }
+                        else
+                        {
+                            @item.ObtenerPrecio()
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@using Dominio
+@model Cliente
+<h1>Billetera Electronica</h1>
+<h4>Cargar saldo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <p> @Model.Nombre, usted tiene $ @Model.ObtenerSaldo()</p>
+            <div class="form-group">
+                <form asp-action="CargarSaldo" method="post" id="cSaldo">
+                    <input type="number" name="monto" id="monto"/>
+                    <button type="submit">Cargar</button>
+                </form>
+                <p id="txt">@ViewBag.MsjCS</p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+<script src="/js/Usuario/cSaldo.js"></script>

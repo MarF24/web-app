@@ -1,0 +1,36 @@
+﻿@using Dominio
+@model Usuario
+<h1>Formulario de Alta</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="formulario">
+            <div class="form-group">
+                <label  class="control-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" id="nombre"/>
+            </div>
+             <div class="form-group">
+                <label  class="control-label">Apellido</label>
+                <input asp-for="Apellido" class="form-control" id="apellido" />
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" id="email" />
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Contraseña</label>
+                <input asp-for="Contrasenia" type="password" class="form-control" id="pass"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+        <p id="txt">@ViewBag.msg</p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+<script src="/js/Home/formulario.js"></script>
